@@ -1,5 +1,5 @@
 
-# What's New in HTML 5.2
+## What's New in HTML 5.2
 
 Date: Jan 08, 2018
 
