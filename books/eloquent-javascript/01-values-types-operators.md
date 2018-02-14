@@ -108,8 +108,9 @@ Source: https://eloquentjavascript.net/3rd_edition/
 
 #### Short-circuiting of logical operators
 
-
-
+* (confusing!)
+* The logical operators `&&` and `||` will convert value on left to Boolean in order to decide what to do
+* 
 
 
 
