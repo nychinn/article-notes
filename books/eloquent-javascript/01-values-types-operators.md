@@ -110,10 +110,13 @@ Source: https://eloquentjavascript.net/3rd_edition/
 
 * (confusing!)
 * The logical operators `&&` and `||` will convert value on left to Boolean in order to decide what to do
-* 
-
-
-
+* `||` operator will return value on left if its true, the value on the right if not
+* We use this func as a way to fall back on a default value
+* `&&` operator will return value on left if its false, the value on the right if not
+* The part on the right is only evaluated when necessary
+* `true || x` - No matter what x is, it will never be evaluated because 'true' already is
+* `false && x` - No matter what x is, it will never be evaluated because 'false' already is
+* This is called short circuit evaluation
 
 
 
