@@ -48,6 +48,170 @@ Source: https://eloquentjavascript.net/3rd_edition/
 * Can include dollar signs ($) or underscores but no other punctuation or special charas
 * Words with a special meaning such as `const` are keywords and cannot be used
 * There are also a number of words that are `reserved for use` in future versions of JS
+* Special words: `break case catch class const continue debugger default delete do else enum export extends false finally for function if implements import interface in instanceof let new package private protected public return static super switch this throw true try typeof var void while with yield`
+
+#### The environment
+
+* Collection of bindings and values that exist at one time is called the `environment`
+* By default, the environment contains bindings that are part of the language standard .. gives way to interact with the system
+* In a browser, there are functions already there to interact the current loaded website to read mouse and keyboard input
+
+#### Functions
+
+* Lots of values in default environment have the type `function`
+* A function is a piece of program wrapper in a value
+* eg) The binding `prompt` holds a function to show a dialog box asking for user input
+* Excecuting a function is called `invoking`, `calling` or `applying` it
+* Values given to functions are called `arguments`
+* Different functions may need a different number or types of arguments
+* `prompt` isn't really used in modern programming because you can't control the visual but its good for debugging
+
+#### The console.log function
+
+* `console.log` isn't a simple binding
+* It's actually an expression that retrieves the `log` property from the value held by the `console` binding
+
+#### Return values
+
+* Showing a dialog box or writing text to the screen is a `side effect`
+* Lots of functions are useful because of the side effects
+* Functions may product values, so this one would not need to have a side effect to be useful
+* eg) `Math.max` takes any amount of number arguments and gives back the greatest
+* When a function produces a value, it is said to `return` that value
+
+#### Control flow
+
+* When a program has more than one statement, the statements are executed like a story
+* `Number(x)` converts a value to a number. Need to use it in `prompt()` because it takes a string
+* You can use similar functions for `String(x)` or `Boolean(x)` to convert values to those types
+
+#### Conditional execution
+
+* Not all programs are straight roads
+* Branching roads == conditional execution
+* Conditional execution is created with the `if` keyword in JS .. will only run if condition is true, or ignore if not
+* `isNan` returns true only if argument given is `NaN`
+* 
+```let theNumber = Number(prompt("Pick a number"));
+if (!isNaN(theNumber)) {
+	console.log("Your number is the square root of " + theNumber * theNumber);	
+}
+```
+* It would skip the statement if you entered a string like "parrot" because its not a Number
+* Each section between the curly braces `{` and `}` is a `block`
+* If there's only one condition, you could omit the curly braces
+* eg) `if (1 + 1 == 2) console.log('It\'s true'); // True!`
+* Use `else` or `else if` to give two or more alternative paths to the condition. These can be 'chained'
+
+#### While and do loops
+
+* Consider a program that outputs all even number from 0 to 12
+* The idea of writing a program is to make something less work, not more
+* Need a way to repeat code to save time
+* This form of control flow is called a `loop`
+* Looping control flow allows us to go back to some point in the program to repeat until it meets a condition
+* A statement starting with `while` creates a loop
+* 
+```
+let result = 1;
+let counter = 0;
+while (counter < 10) { 
+	result * 2; 
+	counter = counter + 1; 
+}
+console.log(result);
+// 1024
+```
+* Keeps running the loop as long as the expression within the parentheses is `true`
+* A do loop is similar to a while loop
+*
+```
+let yourName;
+do {
+	yourName = prompt("Who are you?");
+} while (!yourName);
+console.log(yourName);
+```
+* Keep looping until it gets something that is not an empty string
+
+#### Indenting Code
+
+* Role of indentation inside blocks is to make the structure of the code stand out
+
+#### for loops
+
+* Many loops follow the same pattern as seen in the while examples
+* Common in many languages
+* 
+```
+for ( let number = 0; number <= 12; number = number + 2 ) {
+	console.log(number);
+}
+```
+* All the statements within the parentheses after `for` are related to the state of the loop
+* Must contain two semicolons
+* First part before first semicolon initialises the loops
+* Second part is the expression that checks if loop should continue
+* Final part updates the state of the loop after every iteration
+
+#### Breaking out of the loop
+
+* Having the loop condition equal to false isn't the only way a loop can end
+* You can use the special statement `break` to immediately jump out of the enclosing loop
+* The `for` loop will never stop unless `break` inside is executed
+* The `continue` keyword is similar to `break` in how it influences the progress of a loop
+* When `continue` is encountered, control jumps out of the body and into the next iteration
+
+#### Updating bindings succintly
+
+* When looping, a program often needs to 'update' a binding
+* Shortcut to add to existing value `counter += 1;`
+* Can use similar shortcuts with other arithmetic operators
+
+#### Dispatching on a value with switch
+
+* JS code can look like this too
+* 
+```
+if (x == "value1") action1();
+else if (x == "value2") action2(); 
+else if (x == "value3") action3(); 
+else defaultAction();
+```
+* There's a construct called `switch` to express a 'dispatch' in a more direct way
+* A chain of statements may look better
+*
+```
+switch (prompt("What is the weather like?")) { 
+	case "rainy":
+		console.log("Remember to bring an umbrella.");
+		break;
+	case "sunny":
+		console.log("Dress lightly."); case "cloudy":
+		console.log("Go outside.");
+		break; 
+	default:
+		console.log("Unknown weather type!");
+		break; 
+}
+```
+* Can put any number of `case` labels inside the block opened by `switch`
+
+#### Capitalization
+
+* Binding names not not contain spaces, but helpful to use multiple words to describe it
+* 
+```
+fuzzylittleturtle
+fuzzy_little_turtle
+FuzzyLittleTurtle
+fuzzyLittleTurtle
+```
+
+#### Capitalization
+
+
+
 
 
 
