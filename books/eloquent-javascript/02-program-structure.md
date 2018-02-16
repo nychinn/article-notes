@@ -208,9 +208,48 @@ FuzzyLittleTurtle
 fuzzyLittleTurtle
 ```
 
-#### Capitalization
+#### Comments
+
+* Sometimes you want to include some related thoughts as part of your program
+* This is what comments are for
+* A comment is a piece of text that are completely ignored by the computer
 
 
+#### Summary
+
+* A program is built out of statements, which may contain more statements
+* Statements tend to contain expressions, which may be built out of smaller expressions
+* Putting statements one after another gives you a program excecuted from top to bottom
+* You can introduce disturbances in the flow by using conditionals and looping statements
+* Bindings are used to file pieces of data under a name, and for tracking states in the program
+* JS has useful standard bindings by default
+* Functions are special values that encapsulate a program
+
+#### Exercise: Looping a triangle
+
+```
+# 
+## 
+###
+#### 
+##### 
+###### 
+#######
+```
+
+##### Answer
+
+```
+var counter = 0;
+var text = '';
+while ( counter < 7 ) {
+	console.log(text);
+	counter ++;
+	text += '#';
+}
+```
+
+#### Exercise: FizzBuzz
 
 
 
