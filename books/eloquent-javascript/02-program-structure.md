@@ -251,13 +251,107 @@ while ( counter < 7 ) {
 
 #### Exercise: FizzBuzz
 
+```
+Print numbers from 1-100
+For numbers divisible by 3 print "Fizz"
+For numbers divisible by 5, print "Buzz" instead
 
+Then
 
+Modify program to print "FizzBuzz" when divisible by both 3 and 5
 
+(This is actually an interview question that has been claimed to weed out a significant percentage of programmer candidates. So if you solved it, your labor market value just went up.)
+```
 
+##### Answer
 
+```
+for ( var i=1; i<101; i++ ) {
+	if ( i % 3 == 0 ) {
+		console.log("Fizz");
+	} else if ( i % 5 == 0 ) {
+		console.log("Buzz");
+	} else {
+		console.log(i);
+	}
+}
 
+for ( var i=1; i<101; i++ ) {
+	if ( (i % 3 == 0) && (i % 5 == 0) ) {
+		console.log("FizzBuzz");
+	} else if ( i % 3 == 0 ) {
+		console.log("Fizz");
+	} else if ( i % 5 == 0 ) {
+		console.log("Buzz");
+	} else {
+		console.log(i);
+	}
+}
+```
 
+#### Exercise: Chessboard
+
+```
+Create a function to create this kind of grid for any value
+
+ # # # #
+# # # #
+ # # # #
+# # # #
+ # # # #
+# # # #
+
+```
+
+##### Answer
+
+```
+// check even and odd numbers to see which character to output
+
+var chessboard = function(size) {
+	for ( var i = size; i>0; i--) {
+		var text = '';
+
+		for ( var j = size; j>0; j-- ) {
+			// if even column, and even row
+			
+			// if odd column, and even row
+
+			// if even column, and odd row
+
+			// if odd column, and odd row
+
+			if ( i % 2 ) {
+				
+			} else {
+				
+			}
+		}
+
+		if ( i % 2 == 0 ) {
+			for ( var j = size; j>0; j-- ) {
+				if ( j % 2 == 0 ) {
+					text += ' ';
+				} else {
+					text += '#';
+				}
+			}
+			console.log(text);
+		} else {
+			for ( var j = size; j>0; j-- ) {
+				if ( j % 2 == 0 ) {
+					text += '#';
+				} else {
+					text += ' ';
+				}
+			}
+			console.log(text);
+		}
+	}
+}
+
+chessboard(8);
+```
 
 
 
