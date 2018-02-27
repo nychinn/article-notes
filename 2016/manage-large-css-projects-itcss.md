@@ -69,10 +69,84 @@ Source: https://www.creativebloq.com/web-design/manage-large-css-projects-itcss-
 * In ITCSS, each layer is a logical progression from the last
 * Gets more explicit and intentioned, and narrows the reach of selectors used
 * Writing CSS in a way that only adds up to what was written previously
-* Don't waste time undoing or overriding overly opinionate CSS written before
+* Don't waste time undoing or overriding overly opinionated CSS written before
 * Every thing, type of thing has its own predictable place to live
+* Makes finding and adding styles much simpler
+* ITCSS by default has seven layers
 
+##### 01. Settings
 
+* You'd start here if you're using a preprocessor
+* Holds global settings for your project
+* Should house settings that can accessed from everywhere
+* Examples of global settings might be base font size, colour palettes, config, etc
+
+##### 02. Tools
+
+* Holds your globally available tooling - mixins and functions
+* Any mixin/function that doesn't need global access should belong in the partial it relates to
+* Examples of global tools might be gradient mixins, font-sizing mixins, etc
+
+##### 03. Generic
+
+* The generic layer is the first to produce any CSS
+* Houses very high level, far reaching styles
+* This layer is seldom modified
+* Usually the same across any projects you're on
+* Examples are normalize.css, global box-sizing, css resets, etc
+* Affects a lot of the DOM, and occurs very early on
+
+##### 04. Elements
+
+* Bare unclasses elements
+* What does `<h1>` look like without a class?
+* What does `<a>` look like without a class?
+* Slightly more explicit than prev layer
+* Still very low-specificity but a bit more opinionated than ones above
+* Typically last layer with bare, element-based selectors
+* Once element-level styles have been defined, all additions/deviations are implemented with classes
+
+##### 05. Objects
+
+* Users of OOCSS would be familiar with the concept of objects
+* First layer we find class-based selectors
+* Concerned with styling non-cosmetic patterns or 'objects'
+* Objects can be a simple `.wrapper` element, or layout systems to things like the media object
+* This layer affects less of the DOM than the last layer
+* High specificity
+
+##### 06. Components
+
+* Where we style recognisable pieces of UI
+* Binding onto classes
+* Styles are more explicit
+* More designed pieces of the DOM
+* Shouldn't find any selectors with lower specificity in this layer
+* Majority of your work after intial project set up
+* Adding components/features make up majority of dev
+
+##### 07. Trumps
+
+* This layer 'trumps' all the other layers
+* Power to override anything that has come before it
+* Contain utility, helper classes, hacks, overrides
+* A lot of the declarations will include `!important`
+* Highest specificity layer
+* Narrow focus
+* Forms point of the triangle
+
+* Instead of grouping things into 'typographic styles' or 'form styles', we break them into groups based on specificity, reach and explicitness
+* Write CSS that only ever adds to and inherits what came before
+* Spend little time undoing things because our cascade/specificity are pointing in the same direction
+Reduce amount of collisions, leaks and redefintions
+
+#### Partials
+
+* Each layer contains a series of partials
+* Recommended naming convention `_<layer>.<partial>.scss`
+* eg) `_settings.colors.scss` `_elements.headings.scss` `_components.tabs.scss`
+* Partials should be kept as small and granular as possible
+* Each partial to contain as much CSS as it needs to fulfil its role
 
 
 
