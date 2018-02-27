@@ -147,6 +147,51 @@ Reduce amount of collisions, leaks and redefintions
 * eg) `_settings.colors.scss` `_elements.headings.scss` `_components.tabs.scss`
 * Partials should be kept as small and granular as possible
 * Each partial to contain as much CSS as it needs to fulfil its role
+* `_elements.headings.scss` should only contain rules h1 to h6 and nothing more
+* If you have a page title component to style heading and subheading, you can create a partial `_components.page-title.scss` in components layer
+* This is how ITCSS works
+* We do not place our heading-related styles together, we place all our element based rules together and all our class-based rules together
+* Ordering based on useful CSS metrics
+* Not ordering project in thematic chunks
+
+#### The Result
+
+* Could look like this:
+
+```
+@import "settings.global";
+@import "settings.colors";
+
+@import "tools.functions";
+@import "tools.mixins";
+
+@import "generic.box-sizing";
+@import "generic.normalize";
+
+@import "elements.headings";
+@import "elements.links";
+
+@import "objects.wrappers";
+@import "objects.grid";
+
+@import "components.site-nav";
+@import "components.buttons";
+@import "components.carousel";
+
+@import "trumps.clearfix";
+@import "trumps.utilities";
+@import "trumps.ie8";
+
+```
+
+* Each layer can contain any number of partials
+* These partials could theoretically sit in any @import order
+* Layers should remain in this formation
+* Each layer contains CSS of a similar specificity - all element-based, class-based, utility
+* Each layer contains CSS of a similar explicitness - bare HTML elements, styling UI, syling helper classes
+* Each layer contains CSS of a similar reach - ability to affect all DOM, section of DOM, specific DOM node
+
+
 
 
 
