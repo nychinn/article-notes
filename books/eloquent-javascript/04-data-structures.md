@@ -280,7 +280,18 @@ function max(...numbers) {
 * `Math.ceil` - rounds up to nearest whole number
 * `Math.abs` - absolute value of a number
 
+#### Destructuring
 
+* Need to read more about this
+
+#### JSON
+
+* Objects and arrays are stored in the computer's memory as sequences of bits holding addresses
+* An array with another array inside it consists of at least one memory region for inner array, and one for outer array
+* If you want to save data in a file for later, you have to convert these memory address to a description that can be stored or sent
+* We can serialize the data - convert to a flat description
+* JSON - JavaScript Object Notation
+* JSON is widely used as data storage
 
 
 
