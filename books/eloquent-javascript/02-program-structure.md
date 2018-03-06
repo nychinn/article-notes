@@ -1,7 +1,7 @@
 
 ## Eloquent JavaScript
 
-Date notes written: Feb 15, 2017
+Date notes written: Feb 15, 2018
 
 Source: https://eloquentjavascript.net/3rd_edition/
 

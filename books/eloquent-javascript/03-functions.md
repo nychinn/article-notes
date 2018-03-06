@@ -1,7 +1,7 @@
 
 ## Eloquent JavaScript
 
-Date notes written: Feb 26, 2017
+Date notes written: Feb 26, 2018
 
 Source: https://eloquentjavascript.net/3rd_edition/
 
@@ -314,12 +314,249 @@ console.log(wrap2());
 * The feature of referencing a local binding in an enclosing scope is called `closure`
 * A function that `closes over` local bindings is called a `closure`
 
+```
+function multiplier(factor) {
+	return number => number * factor;
+}
+
+let twice = multiplier(2);
+console.log( twice(5) );
+// 10
+```
+
+* When `multiplier()` is called, it creates an environment where `factor` parameter is set to `2`
+* The function value it returns is stored in `twice` and remembers the environment
+* When called, it multiplies its argument by `2` 🤔
+
+#### Recursion
+
+* It's okay for a function to call itself, but not too often that it overflows the stack
+* A function that calls itself is called `recursive`
+
+```
+function power(base, exponent) {
+	if (exponent == 0) {
+		return 1;
+	} else {
+		return base * power(base, exponent - 1);
+	}
+}
+
+console.log(power(2,3));
+// 8
+```
+
+* Function calls itself multiple times with smaller exponents
+* Three times slower than the looping version
+* Running through simple loop is generally cheaper than calling a func multiple times
+* Speed vs elegance, Human friendliness vs machine friendliness
+* Worrying about efficiency can be a distraction
+* Always start by writing something that's correct and easy to understand
+* Recursion is not always an inefficient alternative to looping. Some problems easier to solve with recursion than loops.
+
+https://medium.com/@zfrisch/understanding-recursion-in-javascript-992e96449e03
+
+* When constructing a recursive function in JS, there must always be a leave event
+* Leave event is a control statement that allowed the func to exit recursive loop
+* Leave event can be an if statement, ternary argument, switch statement, etc
+* Recursive function
+
+```
+function countDown(n) {
+	console.log(n);
+	if (n >= 1) countDown(n-1);
+}
+countDown(5);
+```
+
+* Function with for-loop
+
+```
+function countDown(n) {
+	for (let i=n; i>=0; i--) {
+		console.log(i);
+	}
+}
+countDown(5);
+```
+
+* Most of the time, it doesn't matter if you use recursion or loops. Up to the programmer
+* Though, there are some cases where recursion is the better option
+* There was a time where a lot of JS libraries would cache the DOM for easier access
+* Recursion made traversing the DOM easier
+
+```
+function Traverse(ele, callback) {
+	callback(ele);
+	ele = ele.firstChild;
+	while (ele) {
+		Traverse(ele, callback);
+		ele = ele.nextSibling;
+	}
+}
+```
+
+#### Growing Functions
+
+* If you find yourself writing similar code multiple times, create a function
+* Try make the function have a single concept
+
+```
+function printFarmInventory(cows, chickens) {
+	let cowString = String(cows);
+	while (cowString.length < 3) {
+		cowString = "0" + cowString;
+	}
+	console.log(`${cowString} Cows`);
+
+	let chickenString = String(chickenS);
+	while (chickenString.length < 3) {
+		chickenString = "0" + chickenString;
+	}
+	console.log(`${chickenString} Chickens`);
+}
+printFarmInventory(7, 11);
+```
+
+* While loop will keep adding zeros until the number is 3 digits long
+* Let the function allow you to add more animals
+
+```
+function printZeroPaddedWithLabel(number, label) {
+	let numberString = String(number);
+	while (numberString.length < 3) {
+		numberString = "0" + numberString;
+	}
+	console.log(`${numberString} ${label}`);
+}
+
+function printFarmInventory(cows, chickens, pigs) {
+	printZeroPaddedWithLabel(cows, "Cows");
+	printZeroPaddedWithLabel(chickens, "Chickens");
+	printZeroPaddedWithLabel(pigs, "Pigs");
+}
+
+printFarmInventory(7, 11, 3);
+```
+
+* Works better but the name `printZeroPaddedWithLabel` is awkward
+* Try pick out single concept
+
+```
+function zeroPad(number, width) {
+	let string = String(number);
+	while (string.length < width) {
+		string = "0" + string;
+	}
+	return string;
+}
+
+function printFarmInventory(cows, chickens, pigs) {
+	console.log(`${zeroPad(cows, 3)} Cows`);
+	console.log(`${zeroPad(chickens, 3)} Chickens`);
+	console.log(`${zeroPad(pigs, 3)} Pigs`);
+}
+
+printFarmInventory(7, 16, 3);
+```
+
+* Another principle is not to add cleverness unless you are sure you will need it
+* Tempting to write general frameworks for every bit of func. Resist.
 
 
+#### Functions and Side Effects
+
+* Functions can be divided into those called for side effects vs for their return value
+* Though def possible for a function to have both
+* The first helper function `printZeroPaddedWithLabel` is called for side effect
+* The second version of the function `zeroPad` is called for its return value
+* Functions that create values are easier to combine in new ways
+* A pure function is a specific kind of value producing function that has no side effects but doesn't reply on side effects from other code
+* A pure function doesn't read global bindings
+* A pure function, when called with same arguments would produce same values
+* A pure function works in any context
+* Nonpure functions require more scaffolding to test
+* Don't feel bad when writing functions that are not pure. Side effects are often useful.
 
 
+#### Summary
+
+* Functions when used as expression can create function value
+* When used as a statement, can be used to declare a binding
+* Arrow functions are another way to create functions
+* Key aspect to functions is understanding scope
+* Each block creates a new scope
+* Parameters and bindings declared in given scope are local, not visible outside of it
+* Seperating tasks your program performs into different functions is useful
+* Functions help organise program by grouping code into pieces that do specific things
 
 
+#### Exercises
+
+##### Minimum
+
+```
+function min(num1, num2) {
+	if ( num1 > num2 ) {
+		return num2;
+	} else {
+		return num1;
+	}
+}
+```
+
+##### Recursion
+
+```
+Check if number is even without using %
+```
+
+```
+function isEven(n) {
+	if (n == 0) return true;
+	else if (n == 1) return false;
+	else if (n < 0) return isEven(-n);
+	else return isEven(n - 2);
+}
+
+console.log(isEven(75));
+```
+
+##### Bean counting
+
+```
+function countBs(string) {
+	let count = 0;
+
+	for ( let i=0; i<string.length; i++ ) {
+		if ( string[i] == 'B' ) {
+			count++;
+		}
+	}
+
+	return count;
+}
+```
+
+```
+function countChar(string, letter) {
+	let counter = 0;
+
+	for ( let i=0; i<string.length; i++ ) {
+		if ( string[i] == letter ) {
+			counter++;
+		}
+	}
+
+	return counter;
+}
+
+function countBs(string) {
+	return countChar(string, 'B');
+}
+
+console.log(countBs('Baby Got Back'));
+```
 
 
 
