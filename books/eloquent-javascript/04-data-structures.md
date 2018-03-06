@@ -106,7 +106,183 @@ let journal = [
 
 #### Mutability
 
-* 
+* The types of values discussed in earlier chapters (numbers, strings, Booleans) are all `immutable` which means its impossible to change existing value of those types
+* Can combine or derive new values, but when you take specific string value it will remain the same
+* With objects, the content of a value can be modified by changing its properties
+
+#### The log
+
+* Every evening at 10, Jacques records his day
+* Once he has enough data, Jacques intends to use stats to see which events relate to his squirrel transformations
+* Need to loop over entries and tally how many times the event happens vs squirrel transformations
+
+```
+let journal = [];
+
+function addEntry(events, squirrel) {
+	journal.push({events, squirrel});
+};
+
+addEntry(["work", "touched tree", "pizza", "running", "television"], false);
+addEntry(["work", "ice cream", "cauliflower", "lasagna", "touched tree", "brushed tree"], false);
+addEntry(["weekend", "cycling", "break", "peanuts", "beer"], true);
+```
+
+* Computing correlation
+* Use `phi coefficient` to calculate correlation between two numbers ??
+
+```
+function phi(table) {
+	return (table[3] * table[0] - table[2] * table[1]) / 
+		Math.sqrt((table[2] + table[3]) * 
+			(table[0] + table[1]) * 
+			(table[1] + table[3]) * 
+			(table[0] + table[2]);
+}
+```
+
+
+```
+function tableFor(event, journal) {
+	let table = [0, 0, 0, 0];
+	for (let i = 0; i < journal.length; i++) {
+		let entry = journal[i], index = 0;
+
+		if ( entry.events.includes(event) ) {
+			index += 1;
+		}
+
+		if ( entry.squirrel ) {
+			index += 2;
+		}
+
+		table[index] += 1;
+	}
+
+	return table;
+}
+```
+
+* In the `tableFor` function, there's a for-loop that works through each element of the array
+* Simpler way to write this kind of loop...
+
+```
+for ( let entry of JOURNAL ) {
+	console.log(`${entry.events.length} events.`);
+}
+```
+
+* Will loop over elements of the value given after 'of'
+* Not only works for array but also for strings and some other data structures
+
+* Need to find every type of event that occurs in the data set
+
+```
+// https://eloquentjavascript.net/code/jacques_journal.js
+
+function journalEvents(journal) {
+	let events = [];
+	
+	for (let entry of journal) {
+		for (let event of entry.events) {
+			if ( !events.includes(event) ) {
+				events.push(event);
+			}
+		}	
+	}
+
+	return events;
+}
+
+console.log(journalEvents(JOURNAL));
+```
+
+#### Further arrayology
+
+* Methods for removing things at the start of an array are called `unshift` and `shift`
+
+```
+let todoList = [];
+
+function remember(task) {
+	todolist.push(task);
+}
+
+function getTask() {
+	return todoList.shift();
+}
+
+function rememberUrgently(task) {
+	todoList.unshift(task);
+}
+```
+
+* Add tasks to end of queue by calling `remember(groceries);`
+* Get (and remove) front item from queue by calling `getTask();`
+* Adds a task to the front of queue by calling `rememberUrgently(task)`
+* To search for specific value, arrays provide an `indexOf` method (from start to end)
+* To search from end to start, there's a similar method called `lastIndexOf`
+* Both `indexOf` and `lastIndexOf` take optional second argument to indicate where to start searching
+* `slice` - takes start index and end index and returns array with only elements between those two indices. Start index is inclusive. End is exclusive.
+* With slice, when end index is not given it will take all elements after start index
+* `concat` - used to glue arrays together
+
+#### Strings and their properties
+
+* You can't store properties in string values
+* Such values are immutable and cannot be changed
+* Every string value has a number of methods
+* Most useful are `slice` and `indexOf`
+
+```
+let kim = "Kim";
+kim.age = 88;
+console.log(kim.age);
+// undefined
+```
+
+* One different of a string's `indexOf` is that you can search for a string containing more than one character
+* Trim method removes whitespace (spaces, newlines, tabs, similar chara) from start and end
+* `zeroPad` from prev chapter also exists as a method called `padStart`
+* Split a string on every occurence of another string with `split` and join with `join`
+* String can be repeated with the `repeat` method
+* Can access individual characters the same way as accessing array elements
+
+#### Rest parameters
+
+* Can be useful for a function to accept any number of arguments
+* Uses three dots before the function's last parameter
+* Use similar three dot notation to call a function with an array of arguments
+
+```
+function max(...numbers) {
+	let result = -Infinity;
+	for ( let number of numbers ) {
+		if ( numnber > result ) {
+			result = number;
+		}
+	}
+	return result;
+}
+```
+
+#### Math Object
+
+* `Math` is a grab bag of number related utility functions
+* `Math.max` (maximum)
+* `Math.min` (minimum)
+* `Math.sqrt` (square root)
+* `Math` is almost never useful as a value
+* If you need to do trig, Math can help - `Math.sin` `Math.cos` `Math.tan`
+* `Math.PI` - closest approximation of PI that fits in JS number
+* `Math.random` - function that returns a number between zero(inclusive) and one(exclusive)
+* To get whole number `console.log(Math.floor(Math.random() * 10))` // number between 0 - 9
+* `Math.ceil` - rounds up to nearest whole number
+* `Math.abs` - absolute value of a number
+
+
+
+
 
 
 
