@@ -251,7 +251,7 @@ console.log(kim.age);
 #### Rest parameters
 
 * Can be useful for a function to accept any number of arguments
-* Uses three dots before the function's last parameter
+* Uses three dots before the function's last parameter (this works in ES6)
 * Use similar three dot notation to call a function with an array of arguments
 
 ```
@@ -265,6 +265,14 @@ function max(...numbers) {
 	return result;
 }
 ```
+
+* For non ES6 
+
+```
+const args = ['p0', 'p1', 'p2'];
+call_me.apply(this, args);
+```
+
 
 #### Math Object
 
@@ -292,6 +300,142 @@ function max(...numbers) {
 * We can serialize the data - convert to a flat description
 * JSON - JavaScript Object Notation
 * JSON is widely used as data storage
+* JSON looks similar to JS way of writing arrays and objects
+* All property names have to be surrounged by double quotes
+* Only simple data expressions are allowed, no function calls, bindings, or anything that involves actual computation
+* Comments are not allowed in JSON
+
+```
+{
+	"squirrel": false,
+	"events": ["work", "touched tree", "pizza", "running"]
+}
+```
+
+* JavaScript fives functions for JSON
+* `JSON.stringify` and `JSON.parse` that convert data to and from this format
+* `JSON.stringify` takes a JS value and returns a JSON-encoded string
+* `JSON.parse` takes the JSON-encoded string and converts to a value
+
+```
+let string = JSON.stringify({squirrel: false, events: ["weekend"]});
+console.log(string); // {"squirrel": false, "events": ["weekend"]}
+console.log(JSON.parse(string).events); // ["weekend"]
+```
+
+#### Summary
+
+* Objects and arrays provide ways to group several values into a single value
+* Analogy: Put a bunch of related things in a bag and run around with the bag instead of wrapping our arms around the individual things and holding them seperately
+* Most values in JS have properties except `null` and `undefined`
+* Properties accessed using `value.prop` or `value["prop"]`
+* Objects tend to use names for their properties
+* Arrays usually contain conceptually identical values and use numbers as names for their properties
+* There are some named properties in arrays eg) length
+* Methods are functions that live in properties
+* Can iterate over arrays using a special kind of for-loop (let element of array)
+
+#### Exercises
+
+##### The sum of a range
+
+```
+function range(start, end, step=1) {
+	let arr = [];
+
+	if ( end > start ) {
+		for ( let i = start; i <= end; i+=step ) {
+			arr.push(i);
+		}
+	} else {
+		for ( let i = start; i >= end; i+=step ) {
+			arr.push(i);
+		}
+	}
+
+	return arr;
+}
+
+console.log(range(5,2,-1));
+
+function sum(...arr) {
+	let sum = 0;
+	for ( let i = 0; i < arr[0].length; i++ ) {
+		sum += parseInt(arr[0][i]);
+	}
+	return sum;
+}
+```
+
+##### Reversing an array
+
+```
+function reverseArray(...arr) {
+	var newArr = [];
+
+	for ( let i = arr.length; i >= 0; i-- )  {
+		newArr.push(arr[i]);
+	}
+	
+	console.log(newArr);
+	return newArr;
+}
+
+function reverseArrayInPlace(arr) {
+	var first = 0;
+	var last = arr.length - 1;
+
+	while (first < last) {
+		var b = arr[first];
+		arr[first] = arr[last];
+		arr[last] = b;
+
+		first++;
+		last--;
+	}
+
+	return arr;
+}
+
+var x = [-3,5,1,3,2,10];
+console.log(reverseArrayInPlace(x));
+console.log("x is now: " + x);
+
+//-- https://teamtreehouse.com/community/reversing-an-array-in-javascript
+
+//-- found this hard to understand, so i broke this into steps
+//-- of how it is working
+//-- basically switching around the first and last values
+//-- until it reaches the center
+
+//-- last is 6, first is 0
+//-- b will equal -3
+//-- first value of array will now be 10
+//-- last value of array will now be -3
+
+//-- last is 5, first is 1
+//-- b will equal 5
+//-- second value of array will now be 2
+//-- second to last value of array will now be 5
+
+//-- last is 4, first is 1
+//-- b will equal 1
+//-- third value of array will now be 3
+//-- third to last value of array will now be 1
+
+```
+
+##### A List
+
+* Objects as generic blobs of values can be used to build all sorts of data structures
+* Common data structure is a list (not to be confused with an array)
+* A list is a nested set of objects, with first object holding referng to second, the second to third, and so on
+
+
+
+
+
+
 
 
 
