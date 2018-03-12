@@ -221,25 +221,184 @@
 
 
 
-sailor_scouts = ['sailor moon', 'sailor mercury', 'sailor jupiter', 'sailor venus', 'sailor mars']
+# sailor_scouts = ['sailor moon', 'sailor mercury', 'sailor jupiter', 'sailor venus', 'sailor mars']
 # puts sailor_scouts.sort
 
-alphabetical_sailor_scouts = Array.new
-
-sailor_scouts 
-
-
-
+# alpha_sailor_scouts = Array.new
+# sailor_scouts.length.times do |i|
+# end
+# puts alpha_sailor_scouts
 
 
 
+# contents = [ ['Chapter 1: Numbers', 'page 1'], ['Chapter 2: Letters', 'page 72'], ['Chapter 3: Variables', 'page 118'] ]
+
+# lineWidth = 50
+# puts ('Table of Contents').center(lineWidth)
+
+# contents.length.times do |i|
+# 	puts (contents[i][0]).ljust(lineWidth/2) + (contents[i][1]).rjust(lineWidth/2)
+# end
 
 
 
+# def sayMoo numberOfMoos
+# 	puts 'mooooo...' * numberOfMoos
+# 	'yellow submarine'
+# end
+
+# x = sayMoo 3
+# puts x
 
 
 
+# def doubleThis num
+# 	numTimes2 = num*2
+# 	puts num.to_s+' doubled is '+numTimes2.to_s
+# end
 
+# doubleThis 44
+
+
+
+# def ask question
+# 	goodAnswer = false
+# 	while (not goodAnswer)
+# 		puts question
+# 		reply = gets.chomp.downcase
+
+# 		if (reply == 'yes' or reply == 'no')
+# 			goodAnswer = true
+# 			if reply == 'yes'
+# 				answer = true
+# 			else
+# 				answer = false
+# 			end
+# 		else
+# 			puts 'Please answer "yes" or "no".'
+# 		end
+# 	end
+
+# 	answer # this is what we return
+# end
+
+# puts 'Hello, and thank you for ...'
+# puts
+
+# ask 'Do you like eating tacos?'
+# ask 'Do you like eating burritos?'
+# wetsBed = ask 'Do you wet the bed?'
+# ask 'Do you like eating chimichangas?'
+# ask 'Do you like eating sopapillas?'
+# ask 'Do you like eating tamales?'
+# puts 'Just a few more questions'
+# ask 'Do you like drinking horchata?'
+# ask 'Do you like eating flautas?'
+
+# puts
+# puts 'DEBRIEFING'
+# puts 'Thank you for ...'
+# puts
+# puts wetsBed
+
+
+
+def englishNumber number
+	if number < 0 # no negative numbers
+		return 'Please enter a number that isn\'t negative'
+	end
+	if number == 0
+		return 'zero'
+	end
+
+	# no more special cases! no more returns
+
+	numString = ''
+
+	onesPlace = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+	tensPlace = ['ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
+	teenagers = ['eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
+
+	left = number
+	write = left/1000
+	left = left - write*1000
+
+	puts write
+
+	if write > 0
+		thousands = englishNumber write
+		numString = numString + thousands + ' thousand'
+
+		if left > 0
+			numString = numString = ' '
+		end
+	end
+
+	# 'left' is how much of the number still have left to write
+	# 'write' is the part we are writing out right now
+
+	# left = number
+	write = left/100 # how many hundreds left to write
+	left = left - write*100 #subtract those hundreds
+
+	if write > 0
+		# here's a trick
+		hundreds = englishNumber write
+		numString = numString + hundreds + ' hundred'
+
+		# this is recursion
+		# told the method to call itself, but with 'write' instead of the 'number'
+		# 'write' is atm the number of hundreds we have to write out
+		# after we add 'hundreds' to 'numString' we add the string ' hundred' after it
+		# eg) if we originally called 'englishNumber' with 1999, 'write' would be 19, 'left' would be 99
+		# we have 'englishNumber' write out the 'nineteen' for us
+		# then write out ' hundred', then the rest of 'englishNumber' writes out 'ninety-nine'
+
+		if left > 0
+			# so we don't write 'two hundredfifty-one'
+			numString = numString + ' '
+		end
+	end	
+
+	write = left/10 # how many tens are left to write out?
+	left = left - write*10 # subtract those tens
+
+	if write > 0
+		if ((write == 1) and (left > 0))
+			# since we can't write twenty two instead of 'twelve'
+			# we have to make a special exception for these
+			numString = numString + teenagers[left-1]
+			# the '-1' is because teenagers[3] is 'fourteen', not 'thirteen'
+
+			# since we took care of the digit in the ones play already
+			# we have nothing left to write
+			left = 0;
+		else
+			numString = numString + tensPlace[write-1]
+			# the '-1' is because tensPlace[3] is 'forty', not 'thirty'
+		end
+
+		if left > 0
+			# so we don't write 'sixtyfour'...
+			numString = numString + '-'
+		end
+	end
+
+	write = left # how many ones left
+	left = 0 # subtract the ones
+
+	if write > 0
+		numString = numString + onesPlace[write-1]
+		# the '-1' is because onesPlace[3] is 'four', not 'three'
+	end
+
+	#return numString
+	numString
+
+
+end
+
+puts englishNumber(2234)
 
 
 
