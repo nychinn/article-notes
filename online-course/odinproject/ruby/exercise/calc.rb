@@ -303,102 +303,211 @@
 
 
 
-def englishNumber number
-	if number < 0 # no negative numbers
-		return 'Please enter a number that isn\'t negative'
+# time = Time.new # the moment i generated this webpage
+# time2 = time + 60 # one minute later
+
+# puts time
+# puts time2
+
+# puts Time.mktime(2000,1,1) # y2k
+# puts Time.mktime(1989,7,28,21,50) # day i was born
+# puts Time.mktime(1989,7,28,21,50) + 1000000000 # when i will be one billion seconds old
+
+
+
+# def is_number number
+# 	if number != number.to_i
+# 		puts 'Please enter a number'
+# 	else
+# 		return number	
+# 	end
+# end
+
+# def ask question
+# 	good_answer = false
+
+# 	while (not good_answer)
+# 		puts question
+# 		reply = gets.chomp
+
+# 		if reply != reply.to_i.to_s
+# 			puts 'Please enter a number'
+# 		else
+# 			good_answer = true
+# 		end
+# 	end
+
+# 	return reply
+
+# end
+
+# year = ask "What year were you born?"
+# month = ask "What month were you born?"
+# day = ask "What day were you born?"
+# birthdays = (((((Time.new - Time.mktime(year.to_i, month.to_i, day.to_i)) / 60) / 60) / 24) / 365).to_i
+
+# birthdays.times do |i|
+# 	puts (i+1).to_s + ' SPANK!'
+# end
+
+
+
+# colourArray = []
+# colourHash = {}
+
+# colourArray[0] = 'red'
+# colourArray[1] = 'green'
+# colourArray[2] = 'blue'
+# colourHash['strings'] = 'red'
+# colourHash['numbers'] = 'green'
+# colourHash['keywords'] = 'blue'
+
+# colourArray.each do |colour|
+# 	puts colour
+# end
+
+# colourHash.each do |codeType, colour|
+# 	puts codeType + ': ' + colour
+# end
+
+
+
+# weirdHash = Hash.new
+# weirdHash[12] = 'monkeys'
+# weirdHash[[]] = 'emptiness'
+# weirdHash[Time.new] = 'no time like the present'
+
+
+
+# class Die
+# 	def roll
+# 		1 + rand(6)
+# 	end
+# end
+
+# # make dice
+# dice = [Die.new, Die.new]
+
+# # ... roll them
+# dice.each do |die|
+# 	puts die.roll
+# end
+
+
+
+# class Die
+# 	def initialize
+# 		roll
+# 	end
+
+# 	def roll
+# 		@numberShowing = 1 + rand(6)
+# 	end
+
+# 	def cheat number
+# 		if ( number.to_s == number.to_i.to_s )
+# 			if ( number > 0 and number < 7 )
+# 				return number
+# 			end
+# 		end
+# 	end
+
+# 	def showing
+# 		@numberShowing
+# 	end
+# end
+
+# puts Die.new.showing
+
+
+
+# toast = Proc.new do
+# 	puts 'Cheers!'
+# end
+
+# toast.call
+
+
+
+# doYouLike = Proc.new do |aGoodThing|
+# 	puts 'I *really* like '+aGoodThing+'!'
+# end
+
+# doYouLike.call 'chocolate'
+# doYouLike.call 'ruby'
+
+
+
+# def doSelfImportantly someProc
+# 	puts 'Everybody just HOLD ON! I have something to do...'
+# 	someProc.call
+# 	puts 'Ok everyone, I\'m done. Go on with what you were doing.'
+# end
+
+# sayHello = Proc.new do
+# 	puts 'hello'
+# end
+
+# sayGoodbye = Proc.new do
+# 	puts 'goodbye'
+# end
+
+# doSelfImportantly sayHello
+# doSelfImportantly sayGoodbye
+
+
+
+def maybeDo someProc
+	if rand(2) == 0
+		someProc.call
 	end
-	if number == 0
-		return 'zero'
-	end
-
-	# no more special cases! no more returns
-
-	numString = ''
-
-	onesPlace = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
-	tensPlace = ['ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
-	teenagers = ['eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
-
-	left = number
-	write = left/1000
-	left = left - write*1000
-
-	puts write
-
-	if write > 0
-		thousands = englishNumber write
-		numString = numString + thousands + ' thousand'
-
-		if left > 0
-			numString = numString = ' '
-		end
-	end
-
-	# 'left' is how much of the number still have left to write
-	# 'write' is the part we are writing out right now
-
-	# left = number
-	write = left/100 # how many hundreds left to write
-	left = left - write*100 #subtract those hundreds
-
-	if write > 0
-		# here's a trick
-		hundreds = englishNumber write
-		numString = numString + hundreds + ' hundred'
-
-		# this is recursion
-		# told the method to call itself, but with 'write' instead of the 'number'
-		# 'write' is atm the number of hundreds we have to write out
-		# after we add 'hundreds' to 'numString' we add the string ' hundred' after it
-		# eg) if we originally called 'englishNumber' with 1999, 'write' would be 19, 'left' would be 99
-		# we have 'englishNumber' write out the 'nineteen' for us
-		# then write out ' hundred', then the rest of 'englishNumber' writes out 'ninety-nine'
-
-		if left > 0
-			# so we don't write 'two hundredfifty-one'
-			numString = numString + ' '
-		end
-	end	
-
-	write = left/10 # how many tens are left to write out?
-	left = left - write*10 # subtract those tens
-
-	if write > 0
-		if ((write == 1) and (left > 0))
-			# since we can't write twenty two instead of 'twelve'
-			# we have to make a special exception for these
-			numString = numString + teenagers[left-1]
-			# the '-1' is because teenagers[3] is 'fourteen', not 'thirteen'
-
-			# since we took care of the digit in the ones play already
-			# we have nothing left to write
-			left = 0;
-		else
-			numString = numString + tensPlace[write-1]
-			# the '-1' is because tensPlace[3] is 'forty', not 'thirty'
-		end
-
-		if left > 0
-			# so we don't write 'sixtyfour'...
-			numString = numString + '-'
-		end
-	end
-
-	write = left # how many ones left
-	left = 0 # subtract the ones
-
-	if write > 0
-		numString = numString + onesPlace[write-1]
-		# the '-1' is because onesPlace[3] is 'four', not 'three'
-	end
-
-	#return numString
-	numString
-
-
 end
 
-puts englishNumber(2234)
+def twiceDo someProc
+	someProc.call
+	someProc.call
+end
+
+wink = Proc.new do
+	puts '<wink'
+end
+
+glance = Proc.new do
+	puts '<glance>'
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
