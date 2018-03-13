@@ -469,14 +469,14 @@ def twiceDo someProc
 end
 
 wink = Proc.new do
-	puts '<wink'
+	puts '<wink>'
 end
 
 glance = Proc.new do
 	puts '<glance>'
 end
 
-
+maybeDo wink
 
 
 

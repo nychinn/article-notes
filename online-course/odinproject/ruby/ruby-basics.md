@@ -280,6 +280,232 @@ Source: https://pine.fm/LearnToProgram/chap_04.html
 * If you try convert string to float or integer, it just returns 0
 * There are many kinds of objects in Ruby, and can even learn to make your own
 * `puts` means to spit out strings
+* `.to_i` ignores the first thing it doesn't understand and the rest of the string afterwards
+* `puts` means to put string
+* `gets` means to get string (sort of like prompt in javascript)
+* `gets` got all the letters of the name and Enter! Use `chomp` to take any Enters off end of string
+* `.reverse` - backwards version of a string, doesn't reverse actual string, makes new copy
+* `.length` - number of characters in a string
+* `.upcase` - make letters in a string uppercase
+* `.downcase` - make letters in string lowercase
+* `.swapcase` - make letters in a string swap capitalisation
+* `.capitalize` - make first letter of every word uppercase
+* `.center(lineWidth)` - visually format string to be centered
+* `.ljust` - left justify
+* `.rjust` - right justify
+* `.abs` - takes absolute value of the number
+* `random(100)` - will give you random integer greater than/equal to 0 and less than 100
+* Has Math object. `.Math::PI`
+
+### Flow Control
+
+* when strings are compared, they use lexicographical ordering (dictionary ordering)
+* uppercase letters come before lowercase letters
+* The keyword `or` means either or or both
+
+### Write Method
+
+```
+def sayMoo
+	puts 'mooooooo...'
+end
+
+# call it
+sayMoo
+```
+
+* Add parameter
+
+```
+def sayMoo numberOfMoos
+	puts 'mooooo...' * numberOfMoos
+end
+
+sayMoo 3
+```
+
+* Add return value
+
+```
+def sayMoo numberOfMoos
+	puts 'mooooo...' * numberOfMoos
+	'yellow submarine'
+end
+
+x = sayMoo 3
+puts x
+```
+
+
+### The Time Class
+
+* `Time` objects represent moments in time
+* Can add or subtract numbers to or from times to get new times
+* Adding 1.5 to a time makes a new time one and a half seconds later
+* When calculating time, you will gets the seconds back
+
+
+
+### The Hash Class
+
+* Hashes are a lot like arrays
+* Hashes have a bunch of slots which can point to various objects
+* In an array, the slots are lined up in a row and numbered, but hashes aren't in a row
+* Hashes are kinda jumbled together and you can use any object to refer to a slot, not just number
+* Good to have hashes when you have a bunch of things to keep track of but doesn't need to be ordered
+* eg) Can use it to store colours
+* Arrays are for keeping things in order, not hashes
+* People usually use strings to name the slots, but you can use any kind of object
+
+
+
+### Extending classes
+
+* You can define a new method for an existing class, such as `class Integer`
+* Add englishNumber to it (seen in the calc.rb file)
+* Use `self` to refer to the object (the integer)
+
+```
+class Integer
+	def to_eng
+		if self == 5
+			english = 'five'
+		else
+			english = 'fifty-eight'
+		end
+
+		english
+	end
+end
+```
+
+
+
+### Creating Classes
+
+* Creating a new class is as easy as extending an old one
+
+```
+class Die
+	def roll
+		1 + rand(6)
+	end
+end
+
+# make dice
+dice = [die.new, Die.new]
+
+# ... roll them
+dice.each do |die|
+	puts die.roll
+end
+```
+
+* We can roll the dice, and each time it would give a new number
+* If we wanted to keep the value, you would have to attach it to a variable
+
+
+
+### Instance Variables
+
+* When we wanna talk about a string, we just call it a string
+* But we can also refer to it as a 'string object'
+* Sometimes programmers will call it 'and instance of the class `String`'
+* An 'instance of a class' is just an object of that class
+* A method's local variables last until the method is finished
+* To tell instance variables from local variables, they have @ in front
+
+```
+class Die
+	def initialize
+		roll
+	end
+
+	def roll
+		@numberShowing = 1 + rand(6)
+	end
+
+	def showing
+		@numberShowing
+	end
+end
+
+die = Die.new
+die.roll
+puts die.showing
+puts die.showing
+```
+
+* When an object is created, its `initialize` method is always called
+* From Line 424-549 on calc.rb
+* `private` in the class enforces the idea that certain methods can work under the hood
+* `exit` is to end the program
+
+### Blocks and Procs
+https://pine.fm/LearnToProgram/chap_10.html
+
+* Other languages call this sorta thing 'closures'
+* Ability to take a block of code, and wrap it up in an object (proc), store in variable, or pass to a method
+* It's kind of like a method itself but not bound to an object (it is an object)
+* Proc - supposed to be short for 'procedure'
+
+```
+toast = Proc.new do
+	puts 'Cheers!'
+end
+
+toast.call
+```
+
+* Blocks can take parameters
+
+```
+doYouLike = Proc.new do |aGoodThing|
+	puts 'I *really* like '+aGoodThing+'!'
+end
+
+doYouLike.call 'chocolate'
+doYouLike.call 'ruby'
+```
+
+* Why not use methods?
+* There's some things you can't do with methods
+* Methods can't pass methods into other methods, but you can pass procs into methods
+* Methods can't return other methods but they can return procs
+* Procs are objects, methods aren't
+
+### Methods which take Procs
+
+* When we pass a proc into a method, we control how, if, how many times we call the proc
+
+```
+def doSelfImportantly someProc
+	puts 'Everybody just HOLD ON! I have something to do...'
+	someProc.call
+	puts 'Ok everyone, I\'m done. Go on with what you were doing.'
+end
+
+sayHello = Proc.new do
+	puts 'hello'
+end
+
+sayGoodbye = Proc.new do
+	puts 'goodbye'
+end
+
+doSelfImportantly sayHello
+doSelfImportantly sayGoodbye
+```
+
+* Doesn't look like much but is
+* If you wanna save a file, you have to open file, write info you want, then close it
+* If you forget a step, it might not run smoothly
+* Write methods that will determine how many times or even 'if' you should call a proc
+
+
+
+
+
 
 
 
