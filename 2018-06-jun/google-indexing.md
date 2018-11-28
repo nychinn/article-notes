@@ -35,12 +35,30 @@ Source: https://alankent.me/2018/06/04/google-indexing-and-javascript-rendering/
 
 #### Rendering
 * The step between crawling and indexing
-* If a page is loaded via server-side
+* If a page is loaded via server-side the crawler will already have all the content to be indexed already
+* If a page is loaded via client side, JS needs to be run from the DOM before it can be indexed
+* At Google, the rendering is done through Chrome 41 .. so newer JS features may not render properly. It might be updated in late '18
+
+
+#### Build a PWA that can be indexed
+* Server side rendering provides fast first page load exp for users
+* Server side rendering is super friendly for indexers
+* Sites using server side is not a PWA
+* Client side rendering needs all JS to be downloaded, parse, executed first before appearing in the DOM
+* Client side rendering is often slow for first page but faster once info is cached in the browser
+* Dynamic rendering
+
 
 
 #### Other links to read
 [Javascript SEO Experiement](https://www.elephate.com/blog/javascript-seo-experiment/)
 [Improve SEO in a one page app](https://ktquez.com/en/posts/essential-guide-to-improve-seo-in-single-page-application-vuejs.html)
+
+
+
+
+
+
 
 
 
